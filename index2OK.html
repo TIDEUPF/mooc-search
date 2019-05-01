@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Course Data Retriever</title>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="cssOK/moocpopup2.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <!--
+        multiple dates:
+        https://www.class-central.com/course/coursera-learning-how-to-learn-powerful-mental-tools-to-help-you-master-tough-subjects-2161
+        one date:
+        https://www.class-central.com/course/coursera-pay-attention-adhd-through-the-lifespan-606
+        no dates:
+        https://www.class-central.com/course/understanding-dementia-981
+
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-beta.3/classic/ckeditor.js"></script> -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-beta.3/inline/ckeditor.js"></script>
+    <script src="jsOK/moocpopup.js" type="text/javascript" defer></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" integrity="sha384-DmABxgPhJN5jlTwituIyzIUk6oqyzf3+XuP7q3VfcWA2unxgim7OSSZKKf0KSsnh" crossorigin="anonymous">
+    <!-- <script src="ckeditor/ckeditor.js"></script> -->
+</head>
+<body>
+
+    <div id="mymodal" class="modal">
+
+      <div class="modal-content show-extra">
+        <div class="modal-top">
+            <span class="close-x">&times;</span>
+            <h3>Add a MOOC</h3>
+        </div>
+        <div id="course_data_div" class="">
+        	<input id="url" type="text" name="url" autocomplete="off" placeholder="MOOC List/Class Central course link" title="You can insert a link to a course from mooc-list.com or class-central.com here and then click on &quot;Read Info&quot; to get the information from the page automatically">
+	        <button class="btn btn-primary" id="send_url" type="button">Read Info</button>
+			
+			<div id="form" style="display: none;">
+
+			<div class="tab">
+			  <button class="tablinks active" class="active" value="info" type="button">Basic Info</button>
+			  <button class="tablinks" value="extra" type="button">Extra Info</button>
+			</div>
+            <form id="course_data" class="cinfo" action="/server.py">
+
+				<div id="info-tab" class="tabcontent active">
+	                <div class="info-separator">
+	                    <label title="Course title<br>This is the name of the MOOC" class="" for="course_title">
+	                        <i class="fas fa-tags"></i>
+	                    </label>
+	                    <input class="cautofill jq_val cautosave" type="text" name="course_title" id="course_title" placeholder="Course title">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Short title<br>This is the text that will be shown on the icon of this resource" class="" for="course_short_title">
+	                        <i class="fas fa-tag"></i>
+	                    </label>
+	                    <input class="cautosave jq_val" type="text" name="course_short_title" id="course_short_title" maxlength="10" placeholder="Short title">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Course description" class="" for="course_description">
+	                        <i class="fas fa-info-circle"></i>
+	                    </label>
+	                    <div class="cautofill jq_html cautosave" type="text" name="course_desc" id="course_description" placeholder="Course Description">
+	                        <div contenteditable="true"></div>
+	                    </div>
+	                </div>
+
+
+	                <div class="info-separator">
+	                    <label title="Course start dates" class="" for="course_start_dates">
+	                        <i class="fas fa-calendar-alt"></i>
+	                    </label>
+	                    <select class="" id="course_start_dates"></select>
+                        <label title="Is selfpaced?<br>If this box is selected, it means the MOOC has no start or end dates. The students will be able to do and finish this course whenever they want." class="" for="course_selfpaced">
+                            <i class="far fa-calendar-times"></i>
+                        </label>
+                        <input class="cautosave jq_check" type="checkbox" name="course_selfpaced" id="course_selfpaced">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label class="" for="course_start_date">
+	                        
+	                    </label>
+	                    <input class=" cautosave jq_val" type="date" name="course_start_date" id="course_start_date" placeholder="yyyy-mm-dd"> to
+	                    <input class=" cautosave jq_val" type="date" name="course_end_date" id="course_end_date" placeholder="yyyy-mm-dd">
+                        <label title="Select custom date<br>Check this box to input the start and end dates manually. The start date and duration from the MOOC will be ignored." class=" ccuda" for="course_is_custom_date">
+                            <i class="fas fa-pen-square"></i>
+                        </label>
+                        <input class="ccuda" type="checkbox" name="course_is_custom_date" id="course_is_custom_date">
+	                    <!-- <div class="" id="no-dates">Course is not currently ongoing</div> -->
+	                </div>
+
+	                <div class="info-separator">                
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Course length" class="" for="course_duration">
+	                        <i class="far fa-hourglass"></i>
+	                    </label>
+	                    <input class="cautofill jq_val cautosave" type="number" name="course_duration" id="course_duration" placeholder="0" min="0">
+	                    <select class="cautofill jq_val cautosave" type="text" name="course_duration_unit" id="course_duration_unit" >
+	                        <option value="" disabled selected>Length unit</option>
+	                        <option class="" value="W">Weeks</option>
+	                        <option class="" value="S">Sessions</option>
+	                        <option class="" value="D">Days</option>
+	                        <option class="" value="H">Hours</option>
+	                    </select>
+	                </div>
+
+	                <div class="info-separator">                
+	                </div>
+
+                    <div class="info-separator">
+                        <label title="Link to course<br>" class="" for="course_link">
+                            <i class="fas fa-link"></i>
+                        </label>
+                        <input class=" cautofill jq_val cautosave" type="text" name="course_link" id="course_link" placeholder="Link to course">
+                    </div>
+                </div>
+
+				<div id="extra-tab" class="tabcontent" style="display: none;">
+	                <div class="info-separator">
+	                    <label title="Course syllabus" class="" for="course_syllabus">
+	                        <i class="fas fa-graduation-cap"></i>
+	                    </label>
+	                    <div class=" cautofill jq_html cautosave"  name="course_desc" id="course_syllabus" placeholder="Course Syllabus">
+	                        <div contenteditable="true" type="text"></div>
+	                    </div>
+	                </div>
+
+	                <div class="info-separator">  
+		                <label class="" for=""></label>
+		                <button id="add_week" class="week-button btn" type="button">Add week</button>
+		                <button id="remove_week" class="week-button btn" type="button">Remove week</button>
+	                </div>
+	                <div id="syllabus_weeks">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Provider" class="" for="course_provider">
+	                        <i class="fas fa-building"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_provider" id="course_provider" placeholder="Provider">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="University" class="" for="course_university">
+	                        <i class="fas fa-university"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_university" id="course_university" placeholder="University">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Teachers" class="" for="course_instructor">
+	                        <i class="fas fa-user"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_instructor" id="course_instructor" placeholder="Teachers">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Subject" class="" for="course_subject">
+	                        <i class="fas fa-folder-open"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_subject" id="course_subject" placeholder="Subject">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Language" class="" for="course_language">
+	                        <i class="fas fa-language"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_language" id="course_language" placeholder="Language">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Prerequisites" class="" for="course_prerequisites">
+	                        <i class="fas fa-lightbulb"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_prerequisites" id="course_prerequisites" placeholder="Prerequisites">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Effort" class="" for="course_effort">
+	                        <i class="fas fa-clock"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_effort" id="course_effort" placeholder="Effort">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Course price" class="" for="course_price">
+	                        <i class="fas fa-dollar-sign"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_price" id="course_price" placeholder="Course price">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Has exam?" class="" for="course_exam">
+	                        <i class="fas fa-list"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_exam" id="course_exam" placeholder="Has exam?">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Provides certificate?" class="" for="course_certificate">
+	                        <i class="fas fa-certificate"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_certificate" id="course_certificate" placeholder="Provides certificate?">
+	                </div>
+
+	                <div class="info-separator">
+	                    <label title="Certificate price" class="" for="course_cert_price">
+	                        <i class="fas fa-dollar-sign"></i>
+	                    </label>
+	                    <input class=" cautofill jq_val cautosave" type="text" name="course_cert_price" id="course_cert_price" placeholder="Certificate price">
+	                </div>
+                </div>
+            </form>
+        </div> 
+        </div>   
+        <div id="modal-buttons">
+	        <a class="btn btn-default" target=_blank" href="https://www.mooc-list.com/">MOOC List <i class="fas fa-external-link-alt"></i></a> <a class="btn btn-default" target=_blank" href="https://www.class-central.com/">Class Central <i class="fas fa-external-link-alt"></i></a>
+	        <button style="display: none;" id="submit_form" class="btn btn-primary" type="button">Send</button> 
+	        <button title="You will have to fill all the fields manually" class="btn btn-default" id="add_manually" type="button">Add manually</button>  
+	        <button style="display: none;" class="btn btn-default" id="clear-form" type="button">Clear form</button>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>

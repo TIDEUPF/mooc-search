@@ -1,0 +1,269 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px 20px;
+    border: 1px solid #888;
+    width: 640px;
+    margin-bottom: 100px; 
+    overflow: hidden;
+    position: relative;
+    /*height: 500px;*/
+}
+
+
+.modal-top {
+    /*display: block;*/
+    height: 30px;
+    /*border: 1px solid #888;*/
+}
+
+.modal-top h3 {
+    /*font-size: 20px;*/
+    margin: 0px 0px;
+    padding-top: 5px;
+    /*line-height: 30px;*/
+}
+
+.show-extra {
+    overflow: auto;
+    height: auto ;
+}
+
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    top: 0;
+    bottom:0;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    /*//overflow: auto;  Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.close-x {
+    color: #aaaaaa;
+    float: right;
+    margin-top: -2px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-x:hover,
+.close-x:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#url {
+    width: 87%;
+}
+
+
+#course_data label {
+    color: gray;
+    display: inline-block;
+    width: 40px;
+    vertical-align: top;
+    cursor:help;
+    text-shadow: 3px 1px 1px #127ba355;
+}
+
+#course_data label:not(.sub) {
+    font-size: 15px;
+    text-align: center;
+}
+
+label.sub {
+    font-size: 12px;
+    text-align: right;
+    padding-right: 2px;
+}
+
+#course_data input.cautofill {
+    width: 410px;
+}
+
+#course_duration, #course_duration_unit, #course_start_dates, #course_start_date, #course_end_date {
+    height: 24px;
+}
+
+#course_data input#course_duration {
+    width: 40px;
+}
+
+.info-separator {
+    margin-bottom: 5px;
+}
+
+#course_data div.jq_html {
+    display: inline-block;
+    width: 520px;
+}
+
+#course_data div.jq_html, #syllabus_weeks div.jq_html {
+    border-style: solid ;
+    border-color: #000 ;
+    border-width: 1px ;
+}
+
+#course_data div.jq_html div, #syllabus_weeks div.jq_html div {
+    max-height: 150px;
+}
+
+#course_description div {
+    height: 150px;
+}
+
+/*#course_data input[type=checkbox] {
+    margin-left: -1px;
+}*/
+
+#course_start_dates {
+    width: 100px;
+}
+
+#no-dates {
+    display: none;
+    color: red;
+    margin-left: 10px;
+
+}
+
+#course_short_title {
+    width: 90px;
+}
+
+#show_more {
+    position: absolute;
+    /*top: 95%;*/
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+}
+
+/*#submit_form {
+    position: absolute;
+    top: 95%;
+    bottom: 5px;
+    right: 0px;
+    transform: translate(-50%, -50%);
+    height: 40px;
+    width: 70px;
+
+} */     
+
+.modal-content button, #modal-buttons a.btn {
+    height: 28px;
+    line-height: 14px;
+    text-align: center;
+    padding: 6px 6px;
+}
+
+#modal-buttons button {
+    float: right;
+}
+
+#modal-buttons {
+    margin-top: 20px;
+}
+
+#clear-form {
+    margin-right: 5px;
+}
+
+#send_url {
+    float:right;
+}
+
+a.btn i {
+    font-size: 10px;
+}
+
+.week-button {
+    height: 28px;
+    margin-left: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 10px;
+}      
+
+.blur {
+    -webkit-filter: blur(0.6px); /* Safari 6.0 - 9.0 */
+    filter: blur(0.6px);          
+}
+
+.hidden-tab {
+    display: none;
+}
+
+.tab {
+    margin-top: 10px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    border-bottom: none;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    height: 100%;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #fff;
+}
+
+#course_data_div {
+    margin-top: 10px;
+    /*margin-left: 5px;*/
+    margin-bottom: 10px;
+    /*display: inline;*/
+    /*height: 500px;*/
+} 
+
+#course_data {
+    padding-top: 10px;
+    padding-right: 10px;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 370px;
+    width: 100%;
+    /*display: inline-block;*/
+    overflow-y: auto;
+} 
+
+::placeholder, .isPlaceholder {
+    opacity: 0.4;
+    color: black;
+}
+
+.tooltip-custom {
+    box-shadow: -1px -1px 3px gray;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: default;
+}
